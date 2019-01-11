@@ -16,7 +16,7 @@ export default class HomePage extends React.Component {
         isAdmin
         ...ForumItem_CurrentUserFragment
       }
-      allForums(first: 50) {
+      forums(first: 50) {
         nodes {
           nodeId
           ...ForumItem_ForumFragment
@@ -29,12 +29,12 @@ export default class HomePage extends React.Component {
   `;
 
   static propTypes = {
-    data: propType(HomePage.QueryFragment),
+    data: propType(HomePage.QueryFragment)
   };
 
   render() {
     const { data } = this.props;
-    const { loading, error, currentUser, allForums } = data;
+    const { loading, error, currentUser, forums } = data;
     if (loading) {
       return <Main>Loading...</Main>;
     }
@@ -55,8 +55,8 @@ export default class HomePage extends React.Component {
         </p>
         <h1>Forum List</h1>
         <div className="HomePage-forums">
-          {allForums.nodes.length ? (
-            allForums.nodes.map(node => (
+          {forums.nodes.length ? (
+            forums.nodes.map(node => (
               <ForumItem
                 key={node.nodeId}
                 forum={node}
